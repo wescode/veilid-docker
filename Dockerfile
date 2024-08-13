@@ -20,8 +20,8 @@ RUN apt-get clean
 
 COPY veilid-server.conf /etc/veilid-server/veilid-server.conf
 
-EXPOSE 5151/tcp
-EXPOSE 5151/udp
+EXPOSE 5150/tcp
+EXPOSE 5150/udp
 
 CMD ["/usr/bin/veilid-server","--foreground"]
 
