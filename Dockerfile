@@ -1,14 +1,6 @@
-FROM ubuntu:jammy
-
-MAINTAINER Richard Freeman <rich@rich0.org>
-
-LABEL org.opencontainers.image.source https://github.com/rich0/veilid
-
-ENV EMAIL rich@rich0.org
+FROM debian:stable-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
-
-ARG VEILID_VERSION
 
 RUN apt update && apt dist-upgrade -y
 
@@ -22,26 +14,14 @@ RUN echo "deb [arch=amd64 signed-by=/usr/share/keyrings/veilid-packages-keyring.
 
 RUN apt-get update
 
-RUN apt install veilid-server=$VEILID_VERSION veilid-cli=$VEILID_VERSION
+RUN apt install veilid-server veilid-cli
 
 RUN apt-get clean
 
 COPY veilid-server.conf /etc/veilid-server/veilid-server.conf
 
-EXPOSE 5959/tcp
-
-EXPOSE 5050/tcp
-
-EXPOSE 5050/udp
+EXPOSE 5151/tcp
+EXPOSE 5151/udp
 
 CMD ["/usr/bin/veilid-server","--foreground"]
-
-
-# /var/db/veilid-server
-
-# veilid-server --foreground 
-# port 5959, 5150
-# client connects to 5959
-
-
 
