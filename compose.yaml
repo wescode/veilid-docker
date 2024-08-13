@@ -1,0 +1,5 @@
+services:
+  veilid:
+    build: .
+    ports:
+      - "5150:5150"
